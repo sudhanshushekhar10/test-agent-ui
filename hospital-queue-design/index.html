@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Queue Ticket Interface Preview</title>
+    <script>
+        // This script helps ensure proper navigation within iframes
+        window.onload = function() {
+            const frames = document.querySelectorAll('iframe');
+            frames.forEach(frame => {
+                frame.onload = function() {
+                    try {
+                        const frameDoc = frame.contentDocument || frame.contentWindow.document;
+                        const links = frameDoc.querySelectorAll('a');
+                        links.forEach(link => {
+                            if (link.getAttribute('href')) {
+                                const originalHref = link.getAttribute('href');
+                                link.addEventListener('click', function(e) {
+                                    e.preventDefault();
+                                    const targetId = originalHref.replace('.html', '-frame');
+                                    const targetFrame = document.getElementById(targetId);
+                                    if (targetFrame) {
+                                        targetFrame.src = originalHref;
+                                    }
+                                });
+                            }
+                        });
+                    } catch(e) {
+                        console.error("Could not access iframe content due to same-origin policy");
+                    }
+                };
+            });
+        };
+    </script>
+    <style>
+        :root {
+            --primary-color: #1976D2;
+            --secondary-color: #4CAF50;
+            --warning-color: #FF9800;
+            --background-color: #FFFFFF;
+            --text-color: #333333;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: var(--text-color);
+        }
+        
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+        
+        .screens {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+            justify-content: center;
+        }
+        
+        .screen {
+            width: 280px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .screen-title {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+        
+        .justification {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 30px 0;
+        }
+        
+        .justification ul {
+            padding-left: 20px;
+        }
+        
+        .justification li {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Smart Queue Ticket Interface for Hospitals</h1>
+        <p>A user-friendly interface for hospital queue management</p>
+    </div>
+    
+    <div class="container">
+        <h2>Design Overview</h2>
+        <p>
+            This interface allows patients to book OPD appointments online, view their position in real-time,
+            and receive notifications when their turn is approaching. The design follows accessibility guidelines
+            and maintains a clean, minimal approach suitable for users of all ages.
+        </p>
+        
+        <div class="screens">
+            <div class="screen">
+                <div class="screen-title">Home Screen</div>
+                <iframe src="home-screen.html" id="home-screen-frame"></iframe>
+            </div>
+            
+            <div class="screen">
+                <div class="screen-title">Queue Booking Screen</div>
+                <iframe src="booking-screen.html" id="booking-screen-frame"></iframe>
+            </div>
+            
+            <div class="screen">
+                <div class="screen-title">Booking Confirmation</div>
+                <iframe src="confirmation-screen.html" id="confirmation-screen-frame"></iframe>
+            </div>
+            
+            <div class="screen">
+                <div class="screen-title">Queue Status Screen</div>
+                <iframe src="queue-status-screen.html" id="queue-status-screen-frame"></iframe>
+            </div>
+        </div>
+        
+        <div class="justification">
+            <h2>Design Justification</h2>
+            <ul>
+                <li>
+                    <strong>Accessibility-First Design (WCAG 2.1):</strong> High contrast ratios, large touch targets (44×44px minimum), 
+                    clear visual hierarchy, and consistent navigation ensure the app is usable for elderly patients and those with disabilities.
+                </li>
+                <li>
+                    <strong>Progressive Disclosure (Nielsen Norman Group):</strong> Breaking the booking process into logical steps 
+                    reduces cognitive load and decision fatigue, particularly important in healthcare contexts where users may be stressed.
+                </li>
+                <li>
+                    <strong>Status Visibility & Feedback (Jakob Nielsen):</strong> Real-time queue position updates, progress indicators, 
+                    and clear notifications keep users informed and reduce anxiety during waiting periods.
+                </li>
+                <li>
+                    <strong>Minimalist Design (Material Design & Apple HIG):</strong> Limited color palette, strategic use of white space, 
+                    and focus on essential content create a calm, uncluttered experience appropriate for a healthcare setting.
+                </li>
+                <li>
+                    <strong>Consistent Navigation & Mental Models:</strong> Familiar UI patterns and components that match platform 
+                    conventions reduce the learning curve for less tech-savvy users, leveraging existing mental models.
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

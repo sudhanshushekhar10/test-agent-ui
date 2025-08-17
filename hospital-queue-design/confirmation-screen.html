@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation - Smart Queue Ticket</title>
+    <style>
+        :root {
+            --primary-color: #1976D2;
+            --secondary-color: #4CAF50;
+            --warning-color: #FF9800;
+            --background-color: #FFFFFF;
+            --text-color: #333333;
+            --light-gray: #F5F5F5;
+            --medium-gray: #E0E0E0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 414px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            min-height: 100vh;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        header .back {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .main-content {
+            padding: 20px;
+            padding-bottom: 60px;
+        }
+        
+        .ticket-box {
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .ticket-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .ticket-number {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 15px 0;
+            color: var(--primary-color);
+        }
+        
+        .wait-time {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .wait-time-value {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .details-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0 10px;
+        }
+        
+        .details {
+            margin-bottom: 20px;
+        }
+        
+        .details-row {
+            display: flex;
+            margin-bottom: 8px;
+        }
+        
+        .details-label {
+            width: 100px;
+            color: #666;
+        }
+        
+        .notification-toggle {
+            background-color: var(--light-gray);
+            border-radius: 5px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .toggle {
+            width: 50px;
+            height: 24px;
+            background-color: var(--secondary-color);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: white;
+            top: 2px;
+            right: 2px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .btn-secondary {
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 414px;
+            display: flex;
+            background-color: var(--light-gray);
+            border-top: 1px solid var(--medium-gray);
+        }
+        
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+        }
+        
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="booking-screen.html" style="text-decoration: none; color: white;">
+                <div class="back">←</div>
+            </a>
+            <div>Booking Confirmation</div>
+        </header>
+        
+        <div class="main-content">
+            <div class="ticket-box">
+                <div class="ticket-title">TICKET BOOKED</div>
+                <div class="ticket-number">#A045</div>
+                <div class="wait-time">Estimated Wait Time</div>
+                <div class="wait-time-value">45 minutes</div>
+            </div>
+            
+            <div class="details-title">BOOKING DETAILS</div>
+            <div class="details">
+                <div class="details-row">
+                    <div class="details-label">Department:</div>
+                    <div>Cardiology</div>
+                </div>
+                <div class="details-row">
+                    <div class="details-label">Doctor:</div>
+                    <div>Dr. Smith</div>
+                </div>
+                <div class="details-row">
+                    <div class="details-label">Date:</div>
+                    <div>Today, 17 Aug 2025</div>
+                </div>
+                <div class="details-row">
+                    <div class="details-label">Time:</div>
+                    <div>10:00 AM</div>
+                </div>
+            </div>
+            
+            <div class="notification-toggle">
+                <div>Notify when turn is near</div>
+                <div class="toggle"></div>
+            </div>
+            
+            <a href="queue-status-screen.html" style="text-decoration: none;">
+                <button class="btn-primary">VIEW QUEUE STATUS</button>
+            </a>
+            <a href="home-screen.html" style="text-decoration: none;">
+                <button class="btn-secondary">BACK TO HOME</button>
+            </a>
+        </div>
+        
+        <div class="nav-bar">
+            <a href="home-screen.html" style="text-decoration: none; color: inherit; flex: 1;">
+                <div class="nav-item">
+                    <div class="nav-icon">🏠</div>
+                    Home
+                </div>
+            </a>
+            <a href="queue-status-screen.html" style="text-decoration: none; color: inherit; flex: 1;">
+                <div class="nav-item">
+                    <div class="nav-icon">🎫</div>
+                    Queue
+                </div>
+            </a>
+            <div class="nav-item">
+                <div class="nav-icon">📅</div>
+                Appointments
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">👤</div>
+                Profile
+            </div>
+        </div>
+    </div>
+</body>
+</html>

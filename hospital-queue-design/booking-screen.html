@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue Booking Screen - Smart Queue Ticket</title>
+    <style>
+        :root {
+            --primary-color: #1976D2;
+            --secondary-color: #4CAF50;
+            --warning-color: #FF9800;
+            --background-color: #FFFFFF;
+            --text-color: #333333;
+            --light-gray: #F5F5F5;
+            --medium-gray: #E0E0E0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 414px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            min-height: 100vh;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        header .back {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .main-content {
+            padding: 20px;
+            padding-bottom: 60px;
+        }
+        
+        .step-indicator {
+            margin: 20px 0;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .progress-dots {
+            display: flex;
+            margin: 15px 0;
+        }
+        
+        .dot {
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            background-color: var(--medium-gray);
+            margin-right: 5px;
+            position: relative;
+        }
+        
+        .dot.active {
+            background-color: var(--primary-color);
+        }
+        
+        .dot::after {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 25px;
+            background-color: var(--medium-gray);
+            top: 5px;
+            left: 12px;
+        }
+        
+        .dot:last-child::after {
+            display: none;
+        }
+        
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 20px 0 10px;
+            font-size: 14px;
+        }
+        
+        select, .doctor-option {
+            width: 100%;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--medium-gray);
+            background-color: var(--light-gray);
+            font-size: 16px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        
+        .doctor-option {
+            display: block;
+            cursor: pointer;
+        }
+        
+        .doctor-option.selected {
+            border: 2px solid var(--primary-color);
+        }
+        
+        .time-slots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .time-slot {
+            padding: 10px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .time-slot.selected {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            margin: 30px 0 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 414px;
+            display: flex;
+            background-color: var(--light-gray);
+            border-top: 1px solid var(--medium-gray);
+        }
+        
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+        }
+        
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="home-screen.html" style="text-decoration: none; color: white;">
+                <div class="back">←</div>
+            </a>
+            <div>Book Queue Ticket</div>
+        </header>
+        
+        <div class="main-content">
+            <div class="step-indicator">Step 1 of 3</div>
+            <div class="progress-dots">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            
+            <label for="department">SELECT DEPARTMENT</label>
+            <select id="department">
+                <option>Select a department</option>
+                <option selected>Cardiology</option>
+                <option>Dermatology</option>
+                <option>Neurology</option>
+                <option>Orthopedics</option>
+                <option>Pediatrics</option>
+            </select>
+            
+            <label>SELECT DOCTOR</label>
+            <div class="doctor-option selected">Dr. Smith (Available)</div>
+            <div class="doctor-option">Dr. Brown (Available)</div>
+            <div class="doctor-option">Dr. Wilson (Unavailable)</div>
+            
+            <label>SELECT TIME SLOT</label>
+            <div class="time-slots">
+                <div class="time-slot">9:00</div>
+                <div class="time-slot">9:30</div>
+                <div class="time-slot selected">10:00</div>
+                <div class="time-slot">10:30</div>
+                <div class="time-slot">11:00</div>
+                <div class="time-slot">11:30</div>
+                <div class="time-slot">12:00</div>
+                <div class="time-slot">12:30</div>
+            </div>
+            
+            <a href="confirmation-screen.html" style="text-decoration: none;">
+                <button class="btn-primary">CONTINUE</button>
+            </a>
+        </div>
+        
+        <div class="nav-bar">
+            <a href="home-screen.html" style="text-decoration: none; color: inherit; flex: 1;">
+                <div class="nav-item">
+                    <div class="nav-icon">🏠</div>
+                    Home
+                </div>
+            </a>
+            <a href="queue-status-screen.html" style="text-decoration: none; color: inherit; flex: 1;">
+                <div class="nav-item">
+                    <div class="nav-icon">🎫</div>
+                    Queue
+                </div>
+            </a>
+            <div class="nav-item">
+                <div class="nav-icon">📅</div>
+                Appointments
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">👤</div>
+                Profile
+            </div>
+        </div>
+    </div>
+</body>
+</html>
